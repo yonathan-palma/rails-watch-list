@@ -1,0 +1,13 @@
+<%= render 'share/banner' %>
+<div class="container">
+  <h1>My lists</h1>
+  <div class="d-flex">
+    <% @lists.each do |list| %>
+      <%= link_to(list_path(list)) do %>
+        <%= render 'share/card' %>
+      <% end  %>
+    <p><%= list.name %></p>
+  <% end  %>
+  </div>
+
+</div>

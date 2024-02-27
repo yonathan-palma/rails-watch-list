@@ -1,1 +1,53 @@
-<p>show</p>
+<div class="show-banner" style="height: 200px; background-image: linear-gradient(to bottom, rgba(255,255,255,0.12) 0, rgba(0,0,0,0.55) 74.4%), url('https://images.unsplash.com/photo-1534489573486-7d1fa4f436e4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80')">
+  <h3><%= @list.name %></h3>
+</div>
+
+<%# <button class="button-delete btn btn-danger">Delete the list</button> %>
+<%# <%= link_to "", list_path(@list), method: :delete, id: "delete-link", class: "hidden" %>
+
+<div class="container">
+  <div class="card-show-title">
+    <h1>Movies 🎬</h1>
+  </div>
+    <div class="row cards-movie">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-6-sm">
+          <div class="card-movie">
+          <div class="card-poster">
+              <%= image_tag bookmark.movie.poster_url, alt: "movie poster" %>
+          </div>
+          <div class="card-description">
+            <div class="card-title">
+              <h5><%= bookmark.movie.title %></h5>
+              <p> <%= bookmark.movie.rating %> ⭐️</p>
+            </div>
+            <div class="card-overview">
+              <p> <%= bookmark.movie.overview %> </p>
+            </div>
+            <hr>
+              <p><strong>Review</strong></p>
+            <div class="card-review">
+              <p><%= bookmark.comment %></p>
+            <button class="delete-movie btn btn-danger">Delete</button>
+            <%= link_to "", bookmark_path(bookmark), method: :delete, id:"delete-bookmark", class: "hidden" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+
+    <div class="row">
+      <div class="col-12">
+
+        <hr>
+        <div class="form">
+         <h3>Add a new movie</h3>
+        <%= simple_form_for [ @list, @bookmark ] do |f| %>
+          <%= f.input :comment, placeholder: 'Add your comment' %>
+          <%= f.submit "Add movie", class: "btn btn-primary" %>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
